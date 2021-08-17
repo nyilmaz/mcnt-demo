@@ -1,0 +1,9 @@
+micronaut:
+  application:
+    name: mcntDemo
+
+  http:
+    services:
+      test-generated:
+        path: /test-api
+        url: http://localhost:8080
