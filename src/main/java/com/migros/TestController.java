@@ -18,24 +18,24 @@ import reactor.core.publisher.Mono;
 @Controller("/test-api")
 public class TestController {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(TestController.class);
-
-  private final DefaultApi defaultApi;
-
-  public TestController(DefaultApi defaultApi) {
-    this.defaultApi = defaultApi;
-  }
-
-  @Get
-  public void testGet() {
-    var stringPricingResultDtoMap = defaultApi.getProductPricing(123L).blockLast();
-    var test1 = stringPricingResultDtoMap.get("test1");
-    LOGGER.info(test1.toString());
-  }
-
-  @Get("/pricing/{productId}")
-  public Mono<Map<String, PricingResultDto>> getSearchResponse(@PathVariable Long productId) {
-    return Mono.just(Map.of("test1", new PricingResultDto().price(new AmountDto().currency(CurrencyCode.EUR)),
-                            "test2", new PricingResultDto().price(new AmountDto().currency(CurrencyCode.USD))));
-  }
+  //private static final Logger LOGGER = LoggerFactory.getLogger(TestController.class);
+  //
+  //private final DefaultApi defaultApi;
+  //
+  //public TestController(DefaultApi defaultApi) {
+  //  this.defaultApi = defaultApi;
+  //}
+  //
+  //@Get
+  //public void testGet() {
+  //  var stringPricingResultDtoMap = defaultApi.getProductPricing(123L).blockLast();
+  //  var test1 = stringPricingResultDtoMap.get("test1");
+  //  LOGGER.info(test1.toString());
+  //}
+  //
+  //@Get("/pricing/{productId}")
+  //public Mono<Map<String, PricingResultDto>> getSearchResponse(@PathVariable Long productId) {
+  //  return Mono.just(Map.of("test1", new PricingResultDto().price(new AmountDto().currency(CurrencyCode.EUR)),
+  //                          "test2", new PricingResultDto().price(new AmountDto().currency(CurrencyCode.USD))));
+  //}
 }
