@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
 * PricingResultDto
 */
-@javax.annotation.Generated(value = "MicronautClientCodegen", date = "2021-08-17T16:12:57.041579+03:00")
+@jakarta.annotation.Generated(value = "MicronautClientCodegen", date = "2021-08-17T16:12:57.041579+03:00")
 public class PricingResultDto  {
 private AmountDto price;
 

@@ -4,21 +4,20 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.migros</groupId>
   <artifactId>mcnt-demo</artifactId>
-  <version>0.1</version>
-  <packaging>${packaging}</packaging>
+  <version>0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
   <parent>
     <groupId>io.micronaut</groupId>
     <artifactId>micronaut-parent</artifactId>
-    <version>2.5.13</version>
+    <version>3.0.1</version>
   </parent>
 
   <properties>
-    <packaging>jar</packaging>
     <jdk.version>16</jdk.version>
     <release.version>16</release.version>
-    <micronaut.version>2.5.13</micronaut.version>
-    <exec.mainClass>com.migros.Application</exec.mainClass>
+    <micronaut.version>3.0.1</micronaut.version>
+    <exec.mainClass>com.migros.app.Application</exec.mainClass>
     <micronaut.runtime>netty</micronaut.runtime>
   </properties>
 
@@ -29,71 +28,22 @@
     </repository>
   </repositories>
 
-  <dependencies>
-    <dependency>
-      <groupId>io.micronaut</groupId>
-      <artifactId>micronaut-inject</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut.reactor</groupId>
-      <artifactId>micronaut-reactor-http-client</artifactId>
-      <version>2.0.0</version>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut</groupId>
-      <artifactId>micronaut-validation</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut.test</groupId>
-      <artifactId>micronaut-test-junit5</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut</groupId>
-      <artifactId>micronaut-http-client</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut.problem</groupId>
-      <artifactId>micronaut-problem-json</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut</groupId>
-      <artifactId>micronaut-http-server-netty</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut</groupId>
-      <artifactId>micronaut-runtime</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>javax.annotation</groupId>
-      <artifactId>javax.annotation-api</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.swagger.core.v3</groupId>
-      <artifactId>swagger-annotations</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-  </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.migros</groupId>
+        <artifactId>problem</artifactId>
+        <version>0.1-SNAPSHOT</version>
+      </dependency>
+
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>1.2.5</version>
+        <scope>runtime</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <build>
     <plugins>
@@ -113,7 +63,7 @@
             <path>
               <groupId>io.micronaut.openapi</groupId>
               <artifactId>micronaut-openapi</artifactId>
-              <version>2.6.2</version>
+              <version>3.0.3</version>
             </path>
           </annotationProcessorPaths>
           <compilerArgs>
@@ -125,11 +75,16 @@
           <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-inject-java</artifactId>
-            <version>2.5.13</version>
+            <version>${micronaut.version}</version>
           </dependency>
         </dependencies>
       </plugin>
     </plugins>
   </build>
+
+  <modules>
+    <module>problem</module>
+    <module>app</module>
+  </modules>
 
 </project>

@@ -7,7 +7,7 @@ import io.micronaut.http.client.exceptions.HttpClientResponseException;
 import io.micronaut.http.hateoas.JsonError;
 import io.micronaut.http.server.exceptions.ExceptionHandler;
 import java.util.Optional;
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zalando.problem.DefaultProblem;
@@ -16,7 +16,7 @@ import org.zalando.problem.DefaultProblem;
  * @author nyilmaz
  */
 @Produces
-@Singleton
+//@Singleton
 public class HttpClientExceptionHandler implements ExceptionHandler<HttpClientResponseException, HttpResponse<?>> {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientExceptionHandler.class);
