@@ -54,17 +54,18 @@ public class TestController {
   @Get("/test")
   public void test() {
     var pricingResult = defaultApi.getProductPricing(123L)
-                                  .onErrorMap(e -> {
-                                    if (e instanceof HttpClientResponseException) {
-                                      HttpClientResponseException ex = (HttpClientResponseException) e;
-                                      LOGGER.info(ex.getResponse().getBody(JsonError.class).toString());
-                                      LOGGER.info(ex.getResponse().getBody(DefaultProblem.class).toString());
-                                    }
-                                    return Problem.builder().build();
-                                  })
-                                  .doOnError(HttpClientResponseException.class, ex -> {
-                                    LOGGER.info(ex.getResponse().getBody(DefaultProblem.class).toString());
-                                  }).blockFirst();
+                                  //.onErrorMap(e -> {
+                                  //  if (e instanceof HttpClientResponseException) {
+                                  //    HttpClientResponseException ex = (HttpClientResponseException) e;
+                                  //    //LOGGER.info(ex.getResponse().getBody(JsonError.class).toString());
+                                  //    //LOGGER.info(ex.getResponse().getBody(DefaultProblem.class).toString());
+                                  //  }
+                                  //  return Problem.builder().build();
+                                  //})
+                                  //.doOnError(HttpClientResponseException.class, ex -> {
+                                  //  //LOGGER.info(ex.getResponse().getBody(DefaultProblem.class).toString());
+                                  //})
+                                  .blockFirst();
     System.out.println(pricingResult);
   }
 }

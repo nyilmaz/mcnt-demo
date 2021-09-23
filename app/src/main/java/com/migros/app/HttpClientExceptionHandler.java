@@ -1,4 +1,4 @@
-package com.migros.exception;
+package com.migros.app;
 
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
@@ -16,7 +16,7 @@ import org.zalando.problem.DefaultProblem;
  * @author nyilmaz
  */
 @Produces
-//@Singleton
+@Singleton
 public class HttpClientExceptionHandler implements ExceptionHandler<HttpClientResponseException, HttpResponse<?>> {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientExceptionHandler.class);
@@ -28,8 +28,10 @@ public class HttpClientExceptionHandler implements ExceptionHandler<HttpClientRe
     HttpResponse<?> response = exception.getResponse();
     Optional<String> optionalContentType = response.getHeaders().getContentType();
     if (optionalContentType.isPresent() && APPLICATION_PROBLEM_JSON.equals(optionalContentType.get())) {
+      LOGGER.info("---***---");
       LOGGER.info(response.getBody(JsonError.class).toString());
       LOGGER.info(response.getBody(DefaultProblem.class).toString());
+      LOGGER.info("---***---");
     }
     exception.printStackTrace();
     return response;
