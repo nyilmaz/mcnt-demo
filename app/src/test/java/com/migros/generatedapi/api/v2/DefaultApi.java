@@ -12,6 +12,9 @@ import reactor.core.publisher.Flux;
 )
 public interface DefaultApi {
 
-    @Get("/test/{productId}")
+    @Get("/test1/{productId}")
     Flux<String> getProductPricing(@PathVariable("productId") Long productId);
+
+    @Get("/test2/{productId}")
+    String getBlockingProductPricing(@PathVariable("productId") Long productId);
 }

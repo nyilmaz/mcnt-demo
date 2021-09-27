@@ -1,37 +1,36 @@
 package com.migros;
 
 import com.migros.app.Application;
-import com.migros.app.TestController;
 import com.migros.generatedapi.api.v2.DefaultApi;
+import io.micronaut.http.client.exceptions.HttpClientResponseException;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import reactor.core.publisher.Flux;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @MicronautTest(propertySources = "classpath:application-test.yml", application = Application.class,
                packages = "com.migros.app")
 class McntDemoTest {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(TestController.class);
-
   @Inject
   DefaultApi defaultApi;
 
   @Test
-  void testItWorks() {
+  void testNonBlocking() {
+    try {
+      defaultApi.getBlockingProductPricing(12L);
+    } catch (HttpClientResponseException e) {
+      assertTrue(e.getResponse().getBody().isPresent());
+    }
+  }
 
-    Flux<String> productPricing = defaultApi.getProductPricing(12L);
-    String s = productPricing
-        //.doOnError(e -> {
-        //  if (e instanceof HttpClientResponseException) {
-        //    HttpResponse<?> response = ((HttpClientResponseException) e).getResponse();
-        //    var body = response.getBody(DefaultProblem.class);
-        //    LOGGER.info(body.toString());
-        //  }
-        //})
-        .blockFirst();
-    LOGGER.info(s);
+  @Test
+  void testBlocking() {
+    try {
+      defaultApi.getProductPricing(12L).blockFirst();
+    } catch (HttpClientResponseException e) {
+      assertTrue(e.getResponse().getBody().isPresent());
+    }
   }
 }

@@ -13,14 +13,23 @@ import reactor.core.publisher.Mono;
 /**
  * @author nyilmaz
  */
-@Controller("/test")
+@Controller("/")
 public class TestController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(TestController.class);
 
   // actual api
-  @Get("/{productId}")
+  @Get("/test1/{productId}")
   public Mono<String> testGet2(@PathVariable Long productId) {
+    throw Problem.builder()
+                 .withDetail("problem detail")
+                 .withTitle("serious problem")
+                 .withStatus(new HttpStatusType(HttpStatus.INTERNAL_SERVER_ERROR))
+                 .build();
+  }
+  // actual api
+  @Get("/test2/{productId}")
+  public String testGet3(@PathVariable Long productId) {
     throw Problem.builder()
                  .withDetail("problem detail")
                  .withTitle("serious problem")
