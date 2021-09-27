@@ -1,6 +1,8 @@
 micronaut:
+  server:
+    port: 8080
   http:
     services:
       pricings:
-        path: /test/pricings
+        path: /
         url: http://localhost:8080

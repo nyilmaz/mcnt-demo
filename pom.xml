@@ -84,7 +84,6 @@
   </build>
 
   <modules>
-    <module>problem</module>
     <module>app</module>
   </modules>
 
