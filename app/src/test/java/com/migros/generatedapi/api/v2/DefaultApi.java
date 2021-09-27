@@ -11,6 +11,7 @@ import reactor.core.publisher.Flux;
     errorType = DefaultProblem.class
 )
 public interface DefaultApi {
-    @Get("/pricing/{productId}")
-    Flux<PricingResult> getProductPricing(@PathVariable("productId") Long productId);
+
+    @Get("/test/{productId}")
+    Flux<String> getProductPricing(@PathVariable("productId") Long productId);
 }
