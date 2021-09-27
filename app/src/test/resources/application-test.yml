@@ -1,0 +1,6 @@
+micronaut:
+  http:
+    services:
+      pricings:
+        path: /test/pricings
+        url: http://localhost:8080
